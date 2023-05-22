@@ -1,3 +1,10 @@
-i am only seeing the phrase "Product List" on my root route in localhost:3000
+Notes:
 
-here is my 
+Backend works so no need to fiddle with projectManager/server file.
+
+Need to figure out what it is that's wrong with the api endpoints. Maybe that's what's wrong? 
+
+
+I have looked at the possibility of there being an error which I found that my import statement in productRoutes.js for my productController.js was incorrect. (FIXED)
+
+but I am still getting a 404 error... investigating...

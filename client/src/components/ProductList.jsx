@@ -11,9 +11,9 @@ const ProductList = () => {
     const fetchProducts = async () => {
         try {
             const response = await axios.get('http://localhost:8000/api/products');
-            console.log("response", response)
+            console.log('Products response:', response.data); // Log the response data because I cant even
             setProducts(response.data);
-        }   catch (error) {
+        } catch (error) {
             console.error('Error fetching products:', error);
         }
     };
