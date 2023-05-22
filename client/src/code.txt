@@ -1,0 +1,3 @@
+i am only seeing the phrase "Product List" on my root route in localhost:3000
+
+here is my 
