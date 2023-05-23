@@ -11,32 +11,32 @@ const UpdateProduct = () => {
     const [description, setDescription] = useState('');
 
     useEffect(() => {
-        const fetchProduct = async () => {
-            try {
-                const response = await axios.get(`/api/products/${id}`);
-                setProduct(response.data);
-                setTitle(response.data.title);
-                setPrice(response.data.price);
-                setDescription(response.data.description);
-            } catch (error) {
-                console.error('Error fetching product:', error);
-            }
-        };
-
         fetchProduct();
-    }, [id]);
+    });
+
+    const fetchProduct = async () => {
+        try {
+            const response = await axios.get(`http://localhost:8000/api/products/${id}`);
+            setProduct(response.data);
+            setTitle(response.data.title);
+            setPrice(response.data.price);
+            setDescription(response.data.description);
+        } catch (error) {
+            console.error('Error fetching product:', error);
+        }
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
-            await axios.put(`/api/products/${id}`, {
+            await axios.patch(`http://localhost:8000/api/products/${id}`, {
                 title,
                 price,
                 description,
             });
 
-            navigate('/products');
+            navigate(`/products/${id}`);
         } catch (error) {
             console.error('Error updating product:', error);
         }

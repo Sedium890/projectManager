@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import '../styles/ProductList.css'
 
 const ProductList = () => {
     const [products, setProducts] = useState([]);
@@ -29,19 +31,26 @@ const ProductList = () => {
     };
 
     return (
-        <div>
-        <h2>Product List</h2>
-        {products.map((product) => (
-            <div key={product._id}>
-                <h3>{product.title}</h3>
-                <p>{product.description}</p>
-                <p>Price: ${product.price}</p>
-                <button onClick={() => handleDelete(product._id)}>Delete</button>
-                <hr />
+        <div className="product-list-container">
+            <h2 className="product-list-title">Product List</h2>
+            {products.map((product) => (
+                <div className="product" key={product._id}>
+                    <h3>{product.title}</h3>
+                    <p>{product.description}</p>
+                    <p className="product-price">Price: ${product.price}</p>
+                    <button
+                        className="product-delete-button"
+                        onClick={() => handleDelete(product._id)}
+                    >
+                        Delete
+                    </button>
+                    <Link to={`/products/${product._id}`}> View Details  </Link> |
+                    <Link to={`/products/${product._id}/edit`}> Edit </Link>
+                    <hr />
+                </div>
+            ))}
             </div>
-        ))}
-        </div>
-    );
-};
-
-export default ProductList;
+        );
+    };
+    
+    export default ProductList;

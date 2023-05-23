@@ -1,6 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import ProductList from './components/ProductList';
+import Home from './components/Home'
 import ProductDetail from './components/ProductDetail';
 import ProductForm from './components/ProductForm';
 import UpdateProduct from './components/UpdateProduct';
@@ -9,7 +10,7 @@ const App = () => {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<ProductList />} />
+        <Route path="/" element={<Home />} />
         <Route path="/products" element={<ProductList />} />
         <Route path="/products/:id" element={<ProductDetail />} />
         <Route path="/create" element={<ProductForm />} />
