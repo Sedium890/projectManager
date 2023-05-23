@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
+import '../styles/ProductDetail.css'
 
 const ProductDetail = () => {
     const { id } = useParams();
@@ -20,18 +21,18 @@ const ProductDetail = () => {
     }, [id]);
 
     return (
-        <div>
-            <h2>Product Detail</h2>
+        <div className='product-detail-container'>
+            <h2 className='product-detail-title'>Product Detail</h2>
             {product ? (
-                <div>
-                    <h3>{product.title}</h3>
-                    <p>{product.description}</p>
-                    <p>Price: ${product.price}</p>
+                <div className='product-detail-content'>
+                    <h3 className='product-detail-subtitle'>{product.title}</h3>
+                    <p className='product-detail-description'>{product.description}</p>
+                    <p className='product-detail-price'>Price: ${product.price}</p>
                 </div>
             ) : (
                 <p>Loading...</p>
             )}
-            <Link to="/products">Back to Product List</Link>
+            <Link to="/products" className='product-detail-link'>Back to Product List</Link>
         </div>
     );
 };

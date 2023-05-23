@@ -38,15 +38,19 @@ const ProductList = () => {
                     <h3>{product.title}</h3>
                     <p>{product.description}</p>
                     <p className="product-price">Price: ${product.price}</p>
-                    <button
-                        className="product-delete-button"
-                        onClick={() => handleDelete(product._id)}
-                    >
-                        Delete
-                    </button>
-                    <Link to={`/products/${product._id}`}> View Details  </Link> |
-                    <Link to={`/products/${product._id}/edit`}> Edit </Link>
-                    <hr />
+                    <div className='product-actions'>
+                        <button
+                            className="product-delete-button"
+                            onClick={() => handleDelete(product._id)}
+                        >
+                            Delete
+                        </button>
+                    </div>
+                    <div className='product-links'>
+                        <Link to={`/products/${product._id}`}>View Details</Link>
+                        <Link to={`/products/${product._id}/edit`}>Edit</Link>
+                        <hr />
+                    </div>
                 </div>
             ))}
             </div>
