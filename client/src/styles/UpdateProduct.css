@@ -1,0 +1,43 @@
+.update-product-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.update-product-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.update-product-form {
+    margin-top: 20px;
+}
+
+.update-product-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.update-product-form input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.update-product-form input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.update-product-form input[type="submit"]:hover {
+    background-color: #0056b3;
+}

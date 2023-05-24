@@ -1,85 +1,66 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from "react-router-dom";
+import '../styles/UpdateProduct.css'
 
-const UpdateProduct = () => {
+
+const Update = (props) => {
     const { id } = useParams();
+    const [title, setTitle] = useState();
+    const [price, setPrice] = useState();
+    const [description, setDescription] = useState();
     const navigate = useNavigate();
-    const [product, setProduct] = useState(null);
-    const [title, setTitle] = useState('');
-    const [price, setPrice] = useState('');
-    const [description, setDescription] = useState('');
-
+ 
     useEffect(() => {
-        fetchProduct();
-    });
-
-    const fetchProduct = async () => {
-        try {
-            const response = await axios.get(`http://localhost:8000/api/products/${id}`);
-            setProduct(response.data);
-            setTitle(response.data.title);
-            setPrice(response.data.price);
-            setDescription(response.data.description);
-        } catch (error) {
-            console.error('Error fetching product:', error);
-        }
-    };
-
-    const handleSubmit = async (e) => {
+        axios.get('http://localhost:8000/api/products/' + id)
+            .then(res => {
+                setTitle(res.data.title);
+                setPrice(res.data.price);
+                setDescription(res.data.description);
+            })
+            .catch(err => console.log(err))
+    }, [id])
+    const updateProduct = (e) => {
         e.preventDefault();
-
-        try {
-            await axios.patch(`http://localhost:8000/api/products/${id}`, {
-                title,
-                price,
-                description,
-            });
-
-            navigate(`/products/${id}`);
-        } catch (error) {
-            console.error('Error updating product:', error);
-        }
-    };
-
+        axios.patch('http://localhost:8000/api/products/' + id, {
+            title,
+            price,
+            description
+        })
+            .then(res => {
+                console.log(res);
+                navigate("/products");
+            })
+            .catch(err => console.log(err))
+    }
     return (
-        <div>
-            <h2>Update Product</h2>
-            {product ? (
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <label htmlFor="title">Title:</label>
-                        <input
-                            type="text"
-                            id="title"
-                            value={title}
-                            onChange={(e) => setTitle(e.target.value)}
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="price">Price:</label>
-                        <input
-                            type="number"
-                            id="price"
-                            value={price}
-                            onChange={(e) => setPrice(e.target.value)}
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="description">Description:</label>
-                        <textarea
-                            id="description"
-                            value={description}
-                            onChange={(e) => setDescription(e.target.value)}
-                        ></textarea>
-                    </div>
-                    <button type="submit">Update Product</button>
-                </form>
-            ) : (
-                <p>Loading...</p>
-            )}
+        <div className='update-product-container'>
+            <h1 className='update-product-title'>Update a Product</h1>
+            <form className='update-product-form' onSubmit={updateProduct}>
+                <p>
+                    <label>Title:</label><br />
+                    <input type="text" 
+            ß        name="title" 
+                    value={title} 
+                    onChange={(e) => { setTitle(e.target.value) }} />
+                </p>
+                <p>
+                    <label>Price:</label><br />
+                    <input type="text" 
+                    name="price"
+                    value={price} 
+                    onChange={(e) => { setPrice(e.target.value) }} />
+                </p>
+                <p>
+                    <label>Description:</label><br />
+                    <input type="text" 
+                    name="description"
+                    value={description} 
+                    onChange={(e) => { setDescription(e.target.value) }} />
+                </p>
+                <input type="submit" />
+            </form>
         </div>
-    );
-};
-
-export default UpdateProduct;
+    )
+}
+export default Update;
